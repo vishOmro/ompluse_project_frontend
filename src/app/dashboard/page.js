@@ -17,12 +17,13 @@ export default function Dashboard() {
     const fetchUser = async () => {
       try {
         const response = await api.get("/dashboard"); // Add this endpoint in Phoenix
-        setUser(response.data.user || response.data.company);
+        console.log(response);
+        setUser(response.data.company || response.data.user);
       } catch (err) {
         console.log("Error while authenticating: ", err);
         setUser(err);
-        // Cookies.remove("token");
-        // router.push("/auth/login");
+        Cookies.remove("token");
+        router.push("/auth/login");
       }
     };
 

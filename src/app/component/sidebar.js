@@ -2,7 +2,7 @@ import React from "react";
 
 const Sidebar = () => {
   return (
-    <div className="layout-content-container flex flex-col min-w-1/6 bg-white ">
+    <div className="layout-content-container flex flex-col min-w-1/6 bg-white border-r-1 border-gray-400">
       <div className="flex flex-col  gap-2 bg-zinc-200 m-4 mb-1 mt-1  justify-between font-bold p-4 rounded-lg">
         <p className="text-[#111418] truncate ">Total Credits</p>
         <div className="">
