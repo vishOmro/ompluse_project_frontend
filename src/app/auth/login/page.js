@@ -25,6 +25,7 @@ const Login = () => {
       console.log("Error while login: ", error);
     }
   };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 text-black">
       <div className="left max-h-3/4 min-w-1/2 flex justify-center items-center">
@@ -71,7 +72,12 @@ const Login = () => {
           >
             Login
           </button>
-          <p className="text-center mt-4">or</p>
+          <a href="/auth/forget_password">
+            <p className="mt-2 text-sm text-gray-600 px-2 cursor-pointer">
+              forget password?
+            </p>
+          </a>
+          <p className="text-center">or</p>
           <button
             type="submit"
             className="w-full bg-green-600 text-white p-2 rounded-lg mt-4 cursor-pointer"
