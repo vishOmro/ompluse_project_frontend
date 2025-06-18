@@ -19,6 +19,10 @@ const CreateEntity = () => {
     setSuccess("");
 
     try {
+      if (resource.ueid.length < 19) {
+        setError("Entity Id should be 19 digits");
+        return;
+      }
       const formData = new FormData();
       // Nest parameters under "entity"
       formData.append("entity[ueid]", resource.ueid);
@@ -61,7 +65,11 @@ const CreateEntity = () => {
   return (
     <div className="flex flex-col gap-4 p-6 bg-gray-100 text-black min-w-4/5">
       <h1 className="text-3xl font-bold">Add Entity ID</h1>
-      {/* {error && <p className="text-red-500 mb-4">{error}</p>} */}
+      {error && (
+        <p className="absolute right-0 text-red-500 mb-4 bg-red-400/14 px-10 py-4 font-bold rounded-l-lg">
+          {error}
+        </p>
+      )}
       {success && <p className="text-green-500 mb-4">{success}</p>}
       <div className="p-4">
         <form onSubmit={handleSubmit} className="flex flex-wrap gap-4">

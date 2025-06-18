@@ -23,7 +23,7 @@ export default function Register() {
         },
       });
       Cookies.set("token", response.data.token);
-      router.push("/dashboard/dashboard_demo");
+      router.push("/dashboard");
     } catch (err) {
       setError("Registration failed. Please check your details.");
     }

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Sidebar = () => {
@@ -11,91 +12,122 @@ const Sidebar = () => {
       </div>
       <div className="flex h-full min-h-[490px] flex-col justify-between bg-white p-4">
         <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-3 px-3 py-2 rounded-full  bg-[#f0f2f4] cursor-pointer">
-              <div
-                className="text-[#111418]"
-                data-icon="House"
-                data-size="24px"
-                data-weight="fill"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24px"
-                  height="24px"
-                  fill="currentColor"
-                  viewBox="0 0 256 256"
+          <div className="flex flex-col ">
+            <Link rel="stylesheet" href="/dashboard">
+              <div className="flex items-center gap-3 px-3 py-2 rounded-full  bg-[#f0f2f4] cursor-pointer">
+                <div
+                  className="text-[#111418]"
+                  data-icon="House"
+                  data-size="24px"
+                  data-weight="fill"
                 >
-                  <path d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.1Z"></path>
-                </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24px"
+                    height="24px"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                  >
+                    <path d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.1Z"></path>
+                  </svg>
+                </div>
+                <p className="text-[#111418] text-sm font-medium leading-normal">
+                  Dashboard
+                </p>
               </div>
-              <p className="text-[#111418] text-sm font-medium leading-normal">
-                Dashboard
-              </p>
-            </div>
-            <div className="flex items-center gap-3 px-3 py-2 rounded-full hover:bg-[#f0f2f4] cursor-pointer ">
-              <div
-                className="text-[#111418]"
-                data-icon="ChatCircleDots"
-                data-size="24px"
-                data-weight="fill"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24px"
-                  height="24px"
-                  fill="currentColor"
-                  viewBox="0 0 256 256"
+            </Link>
+            <Link href={"/dlt-sms"}>
+              <div className="flex items-center gap-3 px-3 py-2 rounded-full hover:bg-[#f0f2f4] cursor-pointer ">
+                <div
+                  className="text-[#111418]"
+                  data-icon="ChatCircleDots"
+                  data-size="24px"
+                  data-weight="fill"
                 >
-                  <path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24ZM84,140a12,12,0,1,1,12-12A12,12,0,0,1,84,140Zm44,0a12,12,0,1,1,12-12A12,12,0,0,1,128,140Zm44,0a12,12,0,1,1,12-12A12,12,0,0,1,172,140Z"></path>
-                </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24px"
+                    height="24px"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                  >
+                    <path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24ZM84,140a12,12,0,1,1,12-12A12,12,0,0,1,84,140Zm44,0a12,12,0,1,1,12-12A12,12,0,0,1,128,140Zm44,0a12,12,0,1,1,12-12A12,12,0,0,1,172,140Z"></path>
+                  </svg>
+                </div>
+                <p className="text-[#111418] text-sm font-medium leading-normal">
+                  DLT SMS
+                </p>
               </div>
-              <p className="text-[#111418] text-sm font-medium leading-normal">
-                DLT SMS
-              </p>
-            </div>
-            <div className="flex items-center gap-3 px-3 py-2 rounded-full hover:bg-[#f0f2f4] cursor-pointer">
-              <div
-                className="text-[#111418]"
-                data-icon="Briefcase"
-                data-size="24px"
-                data-weight="regular"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24px"
-                  height="24px"
-                  fill="currentColor"
-                  viewBox="0 0 256 256"
+            </Link>
+            <Link href={"/dlt-manager/get-dlts"}>
+              <div className="flex items-center gap-3 px-3 py-2 rounded-full hover:bg-[#f0f2f4] cursor-pointer">
+                <div
+                  className="text-[#111418]"
+                  data-icon="Briefcase"
+                  data-size="24px"
+                  data-weight="regular"
                 >
-                  <path d="M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,72v41.61A184,184,0,0,1,128,136a184.07,184.07,0,0,1-88-22.38V72Zm0,128H40V131.64A200.19,200.19,0,0,0,128,152a200.25,200.25,0,0,0,88-20.37V200ZM104,112a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H112A8,8,0,0,1,104,112Z"></path>
-                </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24px"
+                    height="24px"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                  >
+                    <path d="M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,72v41.61A184,184,0,0,1,128,136a184.07,184.07,0,0,1-88-22.38V72Zm0,128H40V131.64A200.19,200.19,0,0,0,128,152a200.25,200.25,0,0,0,88-20.37V200ZM104,112a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H112A8,8,0,0,1,104,112Z"></path>
+                  </svg>
+                </div>
+                <p className="text-[#111418] text-sm font-medium leading-normal">
+                  DLT Manager
+                </p>
               </div>
-              <p className="text-[#111418] text-sm font-medium leading-normal">
-                DLT Manager
-              </p>
-            </div>
-            <div className="flex items-center gap-3 px-3 py-2  rounded-full hover:bg-[#f0f2f4] cursor-pointer">
-              <div
-                className="text-[#111418]"
-                data-icon="Users"
-                data-size="24px"
-                data-weight="regular"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24px"
-                  height="24px"
-                  fill="currentColor"
-                  viewBox="0 0 256 256"
+            </Link>
+            <Link href={"/campaign"}>
+              <div className="flex items-center gap-3 px-3 py-2  rounded-full hover:bg-[#f0f2f4] cursor-pointer">
+                <div
+                  className="text-[#111418]"
+                  data-icon="Briefcase"
+                  data-size="24px"
+                  data-weight="regular"
                 >
-                  <path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"></path>
-                </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24px"
+                    height="24px"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                  >
+                    <path d="M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,72v41.61A184,184,0,0,1,128,136a184.07,184.07,0,0,1-88-22.38V72Zm0,128H40V131.64A200.19,200.19,0,0,0,128,152a200.25,200.25,0,0,0,88-20.37V200ZM104,112a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H112A8,8,0,0,1,104,112Z"></path>
+                  </svg>
+                </div>
+                <p className="text-[#111418] text-sm font-medium leading-normal rounded-full hover:bg-[#f0f2f4] cursor-pointer">
+                  Campaign
+                </p>
               </div>
-              <p className="text-[#111418] text-sm font-medium leading-normal rounded-full hover:bg-[#f0f2f4] cursor-pointer">
-                Phone Book
-              </p>
-            </div>
+            </Link>
+            <Link href={"/phonebook"}>
+              <div className="flex items-center gap-3 px-3 py-2  rounded-full hover:bg-[#f0f2f4] cursor-pointer">
+                <div
+                  className="text-[#111418]"
+                  data-icon="Users"
+                  data-size="24px"
+                  data-weight="regular"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24px"
+                    height="24px"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                  >
+                    <path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"></path>
+                  </svg>
+                </div>
+                <p className="text-[#111418] text-sm font-medium leading-normal rounded-full hover:bg-[#f0f2f4] cursor-pointer">
+                  Phone Book
+                </p>
+              </div>
+            </Link>
             <div className="flex items-center gap-3 px-3 py-2  rounded-full hover:bg-[#f0f2f4] cursor-pointer">
               <div
                 className="text-[#111418]"

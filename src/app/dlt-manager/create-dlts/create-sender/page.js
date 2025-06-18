@@ -37,6 +37,12 @@ const CreateSender = () => {
     setError("");
     setSuccess("");
 
+    const isValidSenderId = /^[a-zA-Z0-9]{6}$/.test(resource.sender_id);
+    if (!isValidSenderId) {
+      setError("Sender ID must be exactly 6 alphanumeric characters.");
+      return;
+    }
+
     try {
       const formData = new FormData();
       // Nest parameters under "Sender"
@@ -79,7 +85,11 @@ const CreateSender = () => {
   return (
     <div className="flex flex-col gap-4 p-6 bg-gray-100 text-black min-w-4/5">
       <h1 className="text-3xl font-bold">Add Sender ID</h1>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+      {error && (
+        <p className="absolute right-0 text-red-500 mb-4 bg-red-400/14 px-10 py-4 font-bold rounded-l-lg">
+          {error}
+        </p>
+      )}
       {success && <p className="text-green-500 mb-4">{success}</p>}
       <div className="p-4">
         <form onSubmit={handleSubmit} className="flex flex-wrap gap-4">
