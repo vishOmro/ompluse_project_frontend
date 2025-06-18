@@ -1,6 +1,7 @@
 import React from "react";
 
 const DashboardDemo = () => {
+
   return (
     <div className="bg-white text-gray-900 font-[Inter,sans-serif] max-h-3/5">
       <main className="p-6 max-w-[1200px] mx-auto">
@@ -124,6 +125,7 @@ const DashboardDemo = () => {
       </main>
     </div>
   );
+
 };
 
 export default DashboardDemo;
