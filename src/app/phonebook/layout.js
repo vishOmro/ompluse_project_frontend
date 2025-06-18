@@ -1,5 +1,6 @@
 import Navbar from "@/app/component/navbar";
 import Sidebar from "@/app/component/sidebar";
+import ProgressBar from "@/app/component/progressbarcampaign";
 
 export default function RootLayout({ children }) {
   return (
@@ -7,7 +8,7 @@ export default function RootLayout({ children }) {
       <Navbar />
       <div className="flex">
         <Sidebar />
-        {children}
+        <div className="flex flex-col">{children}</div>
       </div>
     </>
   );

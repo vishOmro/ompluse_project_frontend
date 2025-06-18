@@ -46,7 +46,7 @@ const GetEntity = () => {
         <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
           Search
         </button>
-        <a href="/dlt-manager/create-entity">
+        <a href="/dlt-manager/create-dlts">
           <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
             Create Entity
           </button>

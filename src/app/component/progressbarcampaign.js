@@ -1,13 +1,12 @@
 "use client";
 import { useState } from "react";
-import CreateEntity from "../dlt-manager/create-dlts/create-entity/page";
-import CreateSender from "../dlt-manager/create-dlts/create-sender/page";
-import Createtemplate from "../dlt-manager/create-dlts/create-template/page";
+
+import GetGroups from "../phonebook/get-groups/page";
+import GetContacts from "../phonebook/get-contacts/page";
 
 const steps = [
-  { label: "Create Entity", component: <CreateEntity /> },
-  { label: "Create Sender", component: <CreateSender /> },
-  { label: "Create Template", component: <Createtemplate /> },
+  { label: "Groups", component: <GetGroups /> },
+  { label: "Contacts", component: <GetContacts /> },
 ];
 
 export default function Timeline2(inputStep) {

@@ -3,7 +3,7 @@ import { useState } from "react";
 import GetEntity from "../dlt-manager/get-dlts/get-entity/page.js";
 import GetSender from "../dlt-manager/get-dlts/get-sender/page.js";
 import GetTemplate from "../dlt-manager/get-dlts/get-template/page.js";
-import Getcampaign from "../dlt-manager/get-dlts/get-campaign/page.js";
+
 const steps = [
   { label: "Entity Manager", component: <GetEntity /> },
   { label: "Sender Manager", component: <GetSender /> },

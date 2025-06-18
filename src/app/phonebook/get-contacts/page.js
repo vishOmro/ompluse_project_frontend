@@ -46,7 +46,7 @@ const GetContacts = () => {
         <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
           Search
         </button>
-        <a href="/dlt-manager/create-Contacts">
+        <a href="/phonebook/get-contacts/create-contacts">
           <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
             Create Contacts
           </button>
@@ -69,7 +69,7 @@ const GetContacts = () => {
               {/* <th className="table-column-600 px-4 py-3 text-left text-[#111418] w-[400px] text-sm font-medium leading-normal">
                 Operator
               </th> */}
-              <th className="table-column-720 px-4 py-3 text-left  w-60 text-[#637488] text-sm font-medium leading-normal">
+              <th className="table-column-240 px-4 py-3 text-left  w-60 text-[#637488] text-sm font-medium leading-normal">
                 Action
               </th>
             </tr>
@@ -90,7 +90,7 @@ const GetContacts = () => {
                     {item.inserted_at}
                   </td>
 
-                  <td className="table-column-720 h-[72px] px-4 py-2 w-60 text-[#637488] text-sm font-bold leading-normal tracking-[0.015em]">
+                  <td className="table-column-240 h-[72px] px-4 py-2 w-60 text-[#637488] text-sm font-bold leading-normal tracking-[0.015em]">
                     Edit
                   </td>
                 </tr>

@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const api = axios.create({
-  baseURL: "http://localhost:4000/api", // Update with your Phoenix API URL
+  baseURL: "https://omplusebackend.onrender.com/api", // Update with your Phoenix API URL
 });
 
 api.interceptors.request.use(
