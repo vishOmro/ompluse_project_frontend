@@ -1,7 +1,11 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 const Sidebar = () => {
+  const pathname = usePathname();
+  const isActive = (path) => pathname == path;
   return (
     <div className="layout-content-container flex flex-col min-w-1/6 bg-white border-r-1 border-gray-400">
       <div className="flex flex-col  gap-2 bg-zinc-200 m-4 mb-1 mt-1  justify-between font-bold p-4 rounded-lg">
@@ -14,7 +18,11 @@ const Sidebar = () => {
         <div className="flex flex-col gap-4">
           <div className="flex flex-col ">
             <Link rel="stylesheet" href="/dashboard">
-              <div className="flex items-center gap-3 px-3 py-2 rounded-full  bg-[#f0f2f4] cursor-pointer">
+              <div
+                className={`flex items-center gap-3 px-3 py-2 rounded-full cursor-pointer hover:bg-[#f0f2f4] ${
+                  isActive("/dashboard") ? "bg-[#f0f2f4] font-bold" : ""
+                }`}
+              >
                 <div
                   className="text-[#111418]"
                   data-icon="House"
@@ -36,8 +44,12 @@ const Sidebar = () => {
                 </p>
               </div>
             </Link>
-            <Link href={"/dlt-sms"}>
-              <div className="flex items-center gap-3 px-3 py-2 rounded-full hover:bg-[#f0f2f4] cursor-pointer ">
+            <Link href={"/sms"}>
+              <div
+                className={`flex items-center gap-3 px-3 py-2 rounded-full cursor-pointer hover:bg-[#f0f2f4] ${
+                  isActive("/sms") ? "bg-[#f0f2f4] font-bold" : ""
+                }`}
+              >
                 <div
                   className="text-[#111418]"
                   data-icon="ChatCircleDots"
@@ -60,7 +72,13 @@ const Sidebar = () => {
               </div>
             </Link>
             <Link href={"/dlt-manager/get-dlts"}>
-              <div className="flex items-center gap-3 px-3 py-2 rounded-full hover:bg-[#f0f2f4] cursor-pointer">
+              <div
+                className={`flex items-center gap-3 px-3 py-2 rounded-full cursor-pointer hover:bg-[#f0f2f4] ${
+                  isActive("/dlt-manager/get-dlts")
+                    ? "bg-[#f0f2f4] font-bold"
+                    : ""
+                }`}
+              >
                 <div
                   className="text-[#111418]"
                   data-icon="Briefcase"
@@ -83,7 +101,11 @@ const Sidebar = () => {
               </div>
             </Link>
             <Link href={"/campaign"}>
-              <div className="flex items-center gap-3 px-3 py-2  rounded-full hover:bg-[#f0f2f4] cursor-pointer">
+              <div
+                className={`flex items-center gap-3 px-3 py-2 rounded-full cursor-pointer hover:bg-[#f0f2f4] ${
+                  isActive("/campaign") ? "bg-[#f0f2f4] font-bold" : ""
+                }`}
+              >
                 <div
                   className="text-[#111418]"
                   data-icon="Briefcase"
@@ -106,7 +128,11 @@ const Sidebar = () => {
               </div>
             </Link>
             <Link href={"/phonebook"}>
-              <div className="flex items-center gap-3 px-3 py-2  rounded-full hover:bg-[#f0f2f4] cursor-pointer">
+              <div
+                className={`flex items-center gap-3 px-3 py-2 rounded-full cursor-pointer hover:bg-[#f0f2f4] ${
+                  isActive("/phonebook") ? "bg-[#f0f2f4] font-bold" : ""
+                }`}
+              >
                 <div
                   className="text-[#111418]"
                   data-icon="Users"
