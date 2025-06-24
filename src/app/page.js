@@ -6,18 +6,23 @@ import React, { useEffect, useState } from "react";
 
 const Page = () => {
   const router = useRouter();
-  const [isAuthorized, setIsAuthorized] = useState(false);
+ 
+
+
 
   useEffect(() => {
     const token = Cookies.get("token");
-    if (!token) {
+
+      const publicPaths = ["/auth/login", "/auth/register", "/auth/company_login"];
+      const pathIsProtected = !publicPaths.includes(router.pathname);
+    
+      if (!token && pathIsProtected) {
       router.push("/auth/login");
-    } else {
-      setIsAuthorized(true); // allow page rendering
-    }
+    } 
   }, [router]);
 
-  if (!isAuthorized) return null; // or a loader
+  
+
 
   return <div>This is home page</div>;
 };

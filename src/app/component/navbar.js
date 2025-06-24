@@ -1,10 +1,20 @@
 "use client";
 import Cookies from "js-cookie";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 const Navbar = () => {
-  const token = Cookies.get("token");
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const storedToken = Cookies.get("token");
+    setToken(storedToken);
+  }, []);
+
+  const handleLogout = () => {
+    Cookies.remove("token");
+    window.location.reload();
+  };
 
   return (
     <nav className="flex justify-between items-center bg-white text-black h-14 px-4">
@@ -32,10 +42,7 @@ const Navbar = () => {
           {token && (
             <li className="cursor-pointer hover:text-zinc-950 font-semibold">
               <button
-                onClick={() => {
-                  Cookies.remove("token");
-                  window.location.reload(); // refresh to update navbar state
-                }}
+                onClick={handleLogout}
                 className="bg-red-500 px-4 py-1 text-white rounded-lg"
               >
                 Logout
