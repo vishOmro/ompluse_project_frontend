@@ -1,6 +1,7 @@
 "use client";
 import api from "@/app/utils/api";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const CreateEntity = () => {
   const [resource, setResource] = useState({
@@ -20,7 +21,7 @@ const CreateEntity = () => {
 
     try {
       if (resource.ueid.length < 19) {
-        setError("Entity Id should be 19 digits");
+        toast.error("Entity Id should be 19 digits");
         return;
       }
       const formData = new FormData();
@@ -40,8 +41,8 @@ const CreateEntity = () => {
           Accept: "application/json",
         },
       });
-
-      setSuccess("Entity created successfully!");
+      toast.success("Entity Created Successfully");
+      // setSuccess("Entity created successfully!");
       // Reset form
       setResource({
         ueid: "",
@@ -58,20 +59,20 @@ const CreateEntity = () => {
         error.response?.data?.error ||
         error.response?.data?.errors?.ueid?.[0] ||
         "Failed to create entity. Please check your input and try again.";
-      setError(errorMessage);
+      toast.error(errorMessage);
     }
   };
 
   return (
     <div className="flex flex-col gap-4 p-6 bg-gray-100 text-black min-w-4/5">
       <h1 className="text-3xl font-bold">Add Entity ID</h1>
-      {error && (
+      {/* {error && (
         <p className="absolute right-0 text-red-500 mb-4 bg-red-400/14 px-10 py-4 font-bold rounded-l-lg">
           {error}
         </p>
       )}
       {success && <p className="absolute right-0 text-green-500 mb-4 bg-green-400/14 px-10 py-5 font-bold rounded-l-lg">{success}</p>}
-              
+               */}
       <div className="p-4">
         <form onSubmit={handleSubmit} className="flex flex-wrap gap-4">
           <div className="mb-2 w-1/3">

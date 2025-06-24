@@ -39,15 +39,23 @@ const Navbar = () => {
           <li className="cursor-pointer hover:text-zinc-950 font-semibold">
             <Link href="/settings">Settings</Link>
           </li>
+
           {token && (
-            <li className="cursor-pointer hover:text-zinc-950 font-semibold">
-              <button
-                onClick={handleLogout}
-                className="bg-red-500 px-4 py-1 text-white rounded-lg"
-              >
-                Logout
-              </button>
-            </li>
+            <>
+              <li className="avatar">
+                <div className="w-8 rounded-xl">
+                  <img src="https://img.daisyui.com/images/profile/demo/batperson@192.webp" />
+                </div>
+              </li>
+              <li className="cursor-pointer hover:text-zinc-950 font-semibold">
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-500 px-4 py-1 text-white rounded-lg"
+                >
+                  Logout
+                </button>
+              </li>
+            </>
           )}
         </ul>
       </div>

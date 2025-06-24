@@ -33,12 +33,12 @@ export default function Register() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 text-black">
       <div className="left max-h-3/4 min-w-1/2 flex justify-center items-center">
         <img
-          src="/images/login.png"
+          src="/images/Sign_up.gif"
           alt=""
           srcSet=""
           height={100}
           width={100}
-          className="rounded-2xl min-w-3/4 min-h-3/4"
+          className="rounded-2xl min-w-3/4 min-h-3/4 bg-blend-multiply"
         />
       </div>
       <div className="right p-8 w-full min-w-1/2 flex justify-center flex-col items-center">

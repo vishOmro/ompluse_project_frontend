@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import api from "@/app/utils/api";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const [userName, setUserName] = useState("");
@@ -18,10 +19,11 @@ const Login = () => {
         password,
       });
       const token = Cookies.set("token", response.data.token);
-      console.log(token);
+      toast.success("User Login Successfully");
       router.push("/dashboard");
     } catch (error) {
       setError("Invalid username or password", error);
+      toast.error("Plz check your credentials");
       console.log("Error while login: ", error);
     }
   };
@@ -42,7 +44,6 @@ const Login = () => {
         <h2 className="text-2xl font-bold mb-6 text-center">
           Log in to your accouunt
         </h2>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="w-3/4">
           <div className="mb-4">
             <label className="block text-black font-bold">Username</label>
@@ -86,6 +87,7 @@ const Login = () => {
           </button>
         </form>
       </div>
+
     </div>
   );
 };

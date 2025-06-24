@@ -6,25 +6,24 @@ import React, { useEffect, useState } from "react";
 
 const Page = () => {
   const router = useRouter();
- 
-
-
 
   useEffect(() => {
     const token = Cookies.get("token");
 
-      const publicPaths = ["/auth/login", "/auth/register", "/auth/company_login"];
-      const pathIsProtected = !publicPaths.includes(router.pathname);
-    
-      if (!token && pathIsProtected) {
+    const publicPaths = [
+      "/auth/login",
+      "/auth/register",
+      "/auth/company_login",
+      "/sms",
+    ];
+    const pathIsProtected = !publicPaths.includes(router.pathname);
+
+    if (!token && pathIsProtected) {
       router.push("/auth/login");
-    } 
+    }
   }, [router]);
 
-  
-
-
-  return <div>This is home page</div>;
+  return <div></div>;
 };
 
 export default Page;
