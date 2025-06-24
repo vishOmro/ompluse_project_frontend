@@ -3,10 +3,10 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import api from "@/app/utils/api";
+
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-
   const [error, setError] = useState("");
   const router = useRouter();
 
@@ -68,7 +68,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded-lg"
+            className="w-full bg-blue-500 text-white p-2 rounded-lg cursor-pointer"
           >
             Login
           </button>

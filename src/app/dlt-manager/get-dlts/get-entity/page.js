@@ -46,11 +46,11 @@ const GetEntity = () => {
         <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
           Search
         </button>
-        <a href="/dlt-manager/create-dlts">
+        {/* <a href="/dlt-manager/create-dlts/create-entity"> */}
           <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
             Create Entity
           </button>
-        </a>
+        {/* </a> */}
       </div>
       <div className="flex overflow-hidden rounded-xl border border-[#dce0e5] bg-white mt-5">
         <table className="flex-1">
@@ -92,18 +92,35 @@ const GetEntity = () => {
                     {item.entity_type}
                   </td>
                   <td className="table-column-240 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                    <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm fon t-medium leading-normal w-full">
+                    {/* <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm fon t-medium leading-normal w-full">
                       <span className="truncate">
                         {item.verification_status}
                       </span>
-                    </button>
-                  </td>
-                  {/* <td className="table-column-600 h-[72px] px-8 py-2 w-[400px] text-[#637488] text-sm font-normal leading-normal ">
+                    </button> */}
+
+                      <button
+                        className={`flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 w-full
+                              ${item.verification_status === "pending"
+                            ? "bg-yellow-400 text-white"
+                            : item.verification_status === "success"
+                              ? "bg-green-500 text-white"
+                              : item.verification_status === "failed"
+                                ? "bg-red-500 text-white"
+                                : "bg-gray-200 text-black"
+                          }
+                          `}
+                      >
+                        <span className="truncate">{item.verification_status}</span>
+                      </button>
+                    </td>
+
+
+                    {/* <td className="table-column-600 h-[72px] px-8 py-2 w-[400px] text-[#637488] text-sm font-normal leading-normal ">
                     {item.telecom_operator}
                   </td> */}
-                  <td className="table-column-720 h-[72px] px-4 py-2 w-60 text-[#637488] text-sm font-bold leading-normal tracking-[0.015em]">
-                    Edit
-                  </td>
+                    <td className="table-column-720 h-[72px] px-4 py-2 w-60 text-[#637488] text-sm font-bold leading-normal tracking-[0.015em]">
+                      Edit
+                    </td>
                 </tr>
               ))
             ) : (

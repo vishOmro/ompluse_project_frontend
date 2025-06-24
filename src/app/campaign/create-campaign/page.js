@@ -1,8 +1,10 @@
 "use client";
 import api from "@/app/utils/api";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation"; 
 
-const Createcampaign = () => {
+const Createcampaign =() => {
+  const router = useRouter();
   const [resource, setResource] = useState({
     campaign_name: "",
     entity_id: "",
@@ -56,6 +58,7 @@ const Createcampaign = () => {
     e.preventDefault();
     setError("");
     setSuccess("");
+
     const randomFourDigit = Math.floor(1000 + Math.random() * 9000);
 
     try {
@@ -68,6 +71,7 @@ const Createcampaign = () => {
       formData.append("campaign[desc]", resource.desc);
       formData.append("campaign[campaign_id]", randomFourDigit);
 
+      
       if (resource.campaign_proof) {
         formData.append("letter_of_authorization_url", resource.campaign_proof);
       }
@@ -92,6 +96,10 @@ const Createcampaign = () => {
       });
       // Clear file input
       //   e.target.querySelector('input[type="file"]').value = "";
+       setTimeout(() => {
+        router.push("/campaign"); // Adjust to your actual route
+      }, 1500);
+
     } catch (error) {
       console.error("Error while creating campaign:", error);
       const errorMessage =
@@ -109,8 +117,8 @@ const Createcampaign = () => {
   return (
     <div className="flex flex-col gap-4 p-6 bg-gray-100 text-black min-w-4/5">
       <h1 className="text-3xl font-bold">Add campaign ID</h1>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
-      {success && <p className="text-green-500 mb-4">{success}</p>}
+      {error && <p className="absolute right-0 text-red-500 mb-4 bg-red-400/14 px-10 py-4 font-bold rounded-l-lg">{error}</p>}
+      {success && <p className="absolute right-0 text-green-500 mb-4 bg-green-400/14 px-10 py-4 font-bold rounded-l-lg">{success}</p>}
       <div className="p-4">
         <form onSubmit={handleSubmit} className="flex flex-wrap gap-4">
           <div className="mb-2 w-1/3">

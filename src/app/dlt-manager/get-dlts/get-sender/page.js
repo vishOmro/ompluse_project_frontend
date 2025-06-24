@@ -49,9 +49,11 @@ const GetSender = () => {
         <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
           Search
         </button>
+        {/* <a href="/dlt-manager/create-dlts/create-sender"> */}
         <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
           Create Sender
         </button>
+        {/* </a> */}
       </div>
       <div className="flex overflow-hidden rounded-xl border border-[#dce0e5] bg-white mt-5">
         <table className="flex-1">
@@ -92,11 +94,30 @@ const GetSender = () => {
                   <td className="table-column-480 h-[72px] px-4 py-2 w-[400px] text-[#637488] text-sm font-normal leading-normal">
                     {item.desc}
                   </td>
-                  <td className="table-column-240 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
+                  {/* <td className="table-column-240 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
                     <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm fon t-medium leading-normal w-full">
                       <span className="truncate">{item.status}</span>
                     </button>
+                  </td> */}
+
+                  <td className="table-column-240 h-[72px] px-4 py-2 w-60 text- text-sm font-normal leading-normal">
+                    <button
+                      className={`flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 w-full
+                        ${item.status === "pending"
+                          ? "bg-yellow-400 text-white"
+                          : item.status === "success"
+                            ? "bg-green-500 text-white"
+                            : item.status === "failed"
+                              ? "bg-red-500 text-white"
+                              : "bg-gray-200 text-black"
+                        }
+                        `}
+                    >
+                      <span className="truncate">{item.status}</span>
+                    </button>
                   </td>
+
+
                   {/* <td className="table-column-600 h-[72px] px-8 py-2 w-[400px] text-[#637488] text-sm font-normal leading-normal ">
                     {item.telecom_operator}
                   </td> */}

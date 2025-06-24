@@ -116,8 +116,8 @@ const UpdatePassword = () => {
             />
           </div>
           <button
-            type="submit"
-            className="w-full bg-blue-600 text-white font-bold py-2 rounded hover:bg-blue-700 transition duration-200"
+            type="submit" 
+            className="w-full bg-blue-600 text-white cursor-pointer font-bold py-2 rounded hover:bg-blue-700 transition duration-200"
             onClick={handleSubmit}
           >
             Update Password

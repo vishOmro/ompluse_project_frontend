@@ -82,7 +82,7 @@ export default function Register() {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded-lg"
+            className="w-full bg-blue-500 text-white p-2 rounded-lg cursor-pointer"
           >
             Sign Up
           </button>

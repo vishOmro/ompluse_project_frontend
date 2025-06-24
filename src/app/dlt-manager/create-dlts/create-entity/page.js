@@ -70,7 +70,8 @@ const CreateEntity = () => {
           {error}
         </p>
       )}
-      {success && <p className="text-green-500 mb-4">{success}</p>}
+      {success && <p className="absolute right-0 text-green-500 mb-4 bg-green-400/14 px-10 py-5 font-bold rounded-l-lg">{success}</p>}
+              
       <div className="p-4">
         <form onSubmit={handleSubmit} className="flex flex-wrap gap-4">
           <div className="mb-2 w-1/3">
