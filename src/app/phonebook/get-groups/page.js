@@ -46,12 +46,12 @@ const GetGroups = () => {
         <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
           Search
         </button>
-        <a href="/dlt-manager/create-Groups">
+        <a href="phonebook/get-contacts/create-contacts">
           <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
             ADD CONTACTS
           </button>
         </a>
-        <a href="/dlt-manager/create-Groups">
+        <a href="/phonebook/get-groups/create-group">
           <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
             ADD Groups
           </button>

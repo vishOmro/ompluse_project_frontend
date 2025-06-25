@@ -1,9 +1,10 @@
 "use client";
 import api from "@/app/utils/api";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-const Createcampaign =() => {
+const Createcampaign = () => {
   const router = useRouter();
   const [resource, setResource] = useState({
     campaign_name: "",
@@ -71,7 +72,7 @@ const Createcampaign =() => {
       formData.append("campaign[desc]", resource.desc);
       formData.append("campaign[campaign_id]", randomFourDigit);
 
-      
+
       if (resource.campaign_proof) {
         formData.append("letter_of_authorization_url", resource.campaign_proof);
       }
@@ -96,7 +97,8 @@ const Createcampaign =() => {
       });
       // Clear file input
       //   e.target.querySelector('input[type="file"]').value = "";
-       setTimeout(() => {
+
+      setTimeout(() => {
         router.push("/campaign"); // Adjust to your actual route
       }, 1500);
 
@@ -115,125 +117,156 @@ const Createcampaign =() => {
   }, [templates]);
 
   return (
-    <div className="flex flex-col gap-4 p-6 bg-gray-100 text-black min-w-4/5">
-      <h1 className="text-3xl font-bold">Add campaign ID</h1>
+    <div className="bg-gradient-to-br from-indigo-200 to-indigo-400 min-h-screen flex items-center justify-center p-6 font-sans">
       {error && <p className="absolute right-0 text-red-500 mb-4 bg-red-400/14 px-10 py-4 font-bold rounded-l-lg">{error}</p>}
       {success && <p className="absolute right-0 text-green-500 mb-4 bg-green-400/14 px-10 py-4 font-bold rounded-l-lg">{success}</p>}
-      <div className="p-4">
-        <form onSubmit={handleSubmit} className="flex flex-wrap gap-4">
-          <div className="mb-2 w-1/3">
-            <label className="block text-black font-bold mb-2">
-              Campaign Name
-            </label>
-            <input
-              type="text"
-              className="w-full p-2 border rounded"
-              placeholder="Enter Campaign Name"
-              required
-              value={resource.campaign_name}
-              onChange={(e) =>
-                setResource({ ...resource, campaign_name: e.target.value })
-              }
-            />
-          </div>
-          <div className="mb w-1/3">
-            <label className="block text-black font-bold mb-2">
-              Entity ID
-              <select
-                className="w-full p-2 border rounded"
-                required
-                value={resource.entity_id}
-                onChange={(e) =>
-                  setResource({ ...resource, entity_id: e.target.value })
-                }
-              >
-                <option value="" disabled>
-                  Select Entity Id
-                </option>
-                {entities.map((entity) => (
-                  <>
-                    <option key={entity.id} value={entity.id}>
-                      {entity.ueid} - {entity.entity_name}
-                    </option>
-                  </>
-                ))}
-              </select>
-            </label>
-          </div>
 
-          <div className="mb w-1/3">
-            <label className="block text-black font-bold mb-2">
-              Sender ID
-              <select
-                className="w-full p-2 border rounded"
-                required
-                value={resource.sender_id}
-                onChange={(e) =>
-                  setResource({ ...resource, sender_id: e.target.value })
-                }
-              >
-                <option value="" disabled>
-                  Select Sender Id
-                </option>
-                {senders.map((sender) => (
-                  <>
-                    <option key={sender.id} value={sender.id}>
-                      {sender.sender_id} - {sender.desc}
-                    </option>
-                  </>
-                ))}
-              </select>
-            </label>
-          </div>
+      <main className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl max-w-2xl w-full  md:p-6 relative overflow-visible">
 
-          <div className="mb w-1/3">
-            <label className="block text-black font-bold mb-2">
-              Template ID
-              <select
-                className="w-full p-2 border rounded"
-                required
-                value={resource.template_id}
-                onChange={(e) =>
-                  setResource({ ...resource, template_id: e.target.value })
-                }
-              >
-                <option value="" disabled>
-                  Select Template Id
-                </option>
-                {templates.map((template) => (
-                  <>
-                    <option key={template.id} value={template.id}>
-                      {template.template_id} - {template.template_type}
-                    </option>
-                  </>
-                ))}
-              </select>
-            </label>
-          </div>
 
-          <div className="mb w-1/3 flex flex-col">
-            <label className="block text-black font-bold mb-2">
-              Description
-            </label>
-            <textarea
-              rows={4}
-              className="w-full p-2 border rounded"
-              placeholder="Enter Message"
-              value={resource.desc}
-              onChange={(e) =>
-                setResource({ ...resource, desc: e.target.value })
-              }
-            ></textarea>
-          </div>
-        </form>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded mt-4 cursor-pointer w-1/3"
-          onClick={handleSubmit}
-        >
-          Add campaign
-        </button>
-      </div>
+        <div className="w-full p-10 md:p-6">
+
+          <section className="flex flex-col flex-1 gap-4 p-6 max-w-3xl">
+            <div className="flex flex-col flex-1 gap-4 p-6 max-w-3xl">
+              
+              <h1 className="text-3xl font-extrabold text-gray-800 mb-8 select-none">Add Campaign {' '}
+                <span className="text-indigo-600">ID</span>
+              </h1>
+
+              <button className="px-8 py-2 bg-blue-600 w-min-lg text-white mb-2 rounded-lg cursor-pointer">
+                <Link href={"/campaign/"}>X</Link>
+              </button>
+            </div>
+
+
+
+            <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl">
+
+              <div className="flex gap-6 mb-6 flex-wrap">
+
+                <div className="flex flex-col flex-1 min-w-[140px]">
+                  <label className="block text-gray-900 font-semibold mb-1 text-sm">
+                    Campaign Name
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full p-2 border rounded"
+                    placeholder="Enter Campaign Name"
+                    required
+                    value={resource.campaign_name}
+                    onChange={(e) =>
+                      setResource({ ...resource, campaign_name: e.target.value })
+                    }
+                  />
+                </div>
+
+                <div className="flex flex-col flex-1 min-w-[140px]">
+                  <label className="block text-gray-900 font-semibold mb-1 text-sm">
+                    Entity ID
+                  </label>
+                  <select
+                    className="w-full p-2 border rounded"
+                    required
+                    value={resource.entity_id}
+                    onChange={(e) =>
+                      setResource({ ...resource, entity_id: e.target.value })
+                    }
+                  >
+                    <option value="" disabled>
+                      Select Entity Id
+                    </option>
+                    {entities.map((entity) => (
+                      <>
+                        <option key={entity.id} value={entity.id}>
+                          {entity.ueid} - {entity.entity_name}
+                        </option>
+                      </>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="flex gap-6 mb-6 flex-wrap">
+                <div className="flex flex-col flex-1 min-w-[140px]">
+                  <label className="block text-gray-900 font-semibold mb-1 text-sm">
+                    Sender ID
+                  </label>
+                  <select
+                    className="w-full p-2 border rounded"
+                    required
+                    value={resource.sender_id}
+                    onChange={(e) =>
+                      setResource({ ...resource, sender_id: e.target.value })
+                    }
+                  >
+                    <option value="" disabled>
+                      Select Sender Id
+                    </option>
+                    {senders.map((sender) => (
+                      <>
+                        <option key={sender.id} value={sender.id}>
+                          {sender.sender_id} - {sender.desc}
+                        </option>
+                      </>
+                    ))}
+                  </select>
+
+                </div>
+
+                <div className="flex flex-col flex-1 min-w-[140px]">
+                  <label className="block text-gray-900 font-semibold mb-1 text-sm">
+                    Template ID
+                  </label>
+                  <select
+                    className="w-full p-2 border rounded"
+                    required
+                    value={resource.template_id}
+                    onChange={(e) =>
+                      setResource({ ...resource, template_id: e.target.value })
+                    }
+                  >
+                    <option value="" disabled>
+                      Select Template Id
+                    </option>
+                    {templates.map((template) => (
+                      <>
+                        <option key={template.id} value={template.id}>
+                          {template.template_id} - {template.template_type}
+                        </option>
+                      </>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="w-full">
+                <label className="block font-semibold mb-1">
+                  Description
+                </label>
+                <textarea
+                  rows={4}
+                  className="w-full p-2 border rounded"
+                  placeholder="Enter Message"
+                  value={resource.desc}
+                  onChange={(e) =>
+                    setResource({ ...resource, desc: e.target.value })
+                  }
+                ></textarea>
+              </div>
+
+
+              <button
+                type="submit"
+                className="bg-blue-500 w-full text-white p-2 rounded mt-4 cursor-pointer w-1/3"
+                onClick={handleSubmit}
+              >
+                Add campaign
+              </button>
+            </form>
+
+          </section>
+        </div>
+      </main>
     </div>
   );
 };

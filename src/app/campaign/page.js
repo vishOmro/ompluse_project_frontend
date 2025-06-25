@@ -36,7 +36,7 @@ const Getcampaign = () => {
 
   return (
 
-    
+
     <div className="px-4 py-3">
       <h1 className="text-3xl font-bold">Campaign Approvals</h1>
       <p className="text-base text-gray-500 mt-2">
@@ -55,11 +55,9 @@ const Getcampaign = () => {
         </button>
 
         <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
-          <Link href={"/campaign/create-campaign"}>Create Campaign</Link>
+         <Link href={"/campaign/create-campaign"}>Create Campaign</Link>
         </button>
-
-        
-
+    
 
       </div>
       <div className="flex overflow-hidden rounded-xl border border-[#dce0e5] bg-white mt-5">

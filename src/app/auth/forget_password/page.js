@@ -44,7 +44,7 @@ const ForgetPassword = () => {
       ) : null}
       <div className="left max-h-3/4 min-w-1/2 flex justify-center items-center">
         <img
-          src="/images/login.png"
+          src="/images/forgetpass.svg"
           alt=""
           height={100}
           width={100}
