@@ -3,71 +3,12 @@ import { useState } from "react";
 import api from "@/app/utils/api";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-
-// export default function CompanyLogin() {
-//   const [companyName, setCompanyName] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [error, setError] = useState("");
-//   const router = useRouter();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const response = await api.post("/company/login", {
-//         company_name: companyName,
-//         password,
-//       });
-//       Cookies.set("token", response.data.token);
-//       router.push("/dashboard");
-//     } catch (err) {
-//       setError("Login failed. Please check your credentials.");
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-gray-100 text-black">
-//       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-//         <h2 className="text-2xl font-bold mb-6 text-center">Company Login</h2>
-        // {error && <p className="text-red-500 mb-4">{error}</p>}
-//         <form onSubmit={handleSubmit}>
-//           <div className="mb-4">
-//             <label className="block text-gray-700">Company Name</label>
-//             <input
-//               type="text"
-//               value={companyName}
-//               onChange={(e) => setCompanyName(e.target.value)}
-//               className="w-full p-2 border rounded"
-//               required
-//             />
-//           </div>
-//           <div className="mb-4">
-//             <label className="block text-gray-700">Password</label>
-//             <input
-//               type="password"
-//               value={password}
-//               onChange={(e) => setPassword(e.target.value)}
-//               className="w-full p-2 border rounded"
-//               required
-//             />
-//           </div>
-//           <button
-//             type="submit"
-//             className="w-full bg-blue-500 text-white p-2 rounded"
-//           >
-//             Login
-//           </button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-
+import Link from 'next/link';
 
 export default function CompanyLogin() {
 
   const [companyName, setCompanyName] = useState("");
   const [password, setPassword] = useState("");
-  
   const [error, setError] = useState("");
   const router = useRouter();
 
@@ -86,104 +27,103 @@ export default function CompanyLogin() {
   };
 
   return (
-    <>
-      <div className="bg-white font-[Inter]">
-        {/* Header */}
-        <header className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-semibold flex items-center justify-center">
-              G
-            </div>
-            <span className="text-xs font-extrabold text-indigo-700 uppercase tracking-widest">
-              OMRONIX
-            </span>
-          </div>
-          <button className="bg-indigo-600 cursor-pointer text-white text-xs font-semibold rounded-full px-6 py-2 hover:bg-indigo-700 transition">
-            Sign In
-          </button>
-        </header>
 
-        {/* Main */}
-        <main className="max-w-4xl mx-auto px-6 py-10">
-          <h1 className="text-3xl font-bold mb-8">
-            <span className="text-black drop-shadow-sm">Company</span>{' '}
-            <span className="text-indigo-600">Login</span>
-          </h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-200 to-blue-400 font-sans flex items-center justify-center p-6">
 
-          {error && <p className="text-red-500 mb-4">{error}</p>}
-        
-          <form className="space-y-6 max-w-3xl">
-            <div>
-              <label
-                htmlFor="companyName"
-                className="block text-gray-900 font-semibold mb-1 text-lg"
-              >
-                Company Name :
-              </label>
-              <input
-                id="companyName"
-                type="text"
-                placeholder="eg: Omronix"
-                className="w-full border border-gray-200 rounded-md px-4 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                required
-              />
-            </div>
+      <main className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl max-w-5xl w-full flex flex-col md:flex-row p-10 md:p-3 relative overflow-visible">
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-              {[
-                { id: 'password' , label: 'Password'},
-                { id: 'contactno' , label: 'Contact No'},
-                { id: 'tan', label: 'TAN' },
-                { id: 'gst', label: 'GST' },
-                { id: 'pan', label: 'PAN' },
-                { id: 'cin', label: 'CIN' },
-                { id: 'businessType', label: 'Business Type' },
-                { id: 'websiteUrl', label: 'Website URL' },
-              ].map((field) => (
-                <div key={field.id}>
-                  <label
-                    htmlFor={field.id}
-                    className="block text-gray-900 font-semibold mb-1 text-sm"
-                  >
-                    {field.label} <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    id={field.id}
-                    type="text"
-                    placeholder={`eg: Omronix`}
-                    className="w-full border border-gray-200 rounded-md px-4 py-2 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                    required
-                 />
-                </div>
-              ))}
-            </div>
 
-            <div>
-              <label
-                htmlFor="address"
-                className="block text-gray-900 font-semibold mb-1 text-sm"
-              >
-                Address
-              </label>
-              <textarea
-                id="address"
-                rows={3}
-                placeholder="Enter Address"
-                className="w-full border border-gray-200 rounded-md px-4 py-2 text-sm placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              />
-            </div>
+        {/* left side */}
+        <section aria-hidden className="flex-1 flex justify-center items-center relative mt-10 md:mt-0">
+          <img
+            alt="Sign In"
+            src="/images/SignIn.gif"
+            width={400} height={400} className="max-w-full h-auto select-none" draggable={false}
+          />
+        </section>
 
-            <div>
-              <button
-                type="submit"
-                className="w-sm bg-sky-400 hover:bg-sky-500 text-gray-900 font-extrabold cursor-pointer rounded-lg py-3 text-sm tracking-wider"
-              >
-                SUBMIT
+
+        {/* Right Side */}
+        <div className="w-full md:w-1/2 p-10 md:p-16 flex flex-col justify-center">
+
+          <section className="flex flex-col flex-1 max-w-lg">
+
+            <h1 className="text-3xl font-extrabold text-gray-800 mb-8 mt-0 select-none">Company {' '}
+              <span className="text-indigo-600">Login</span>
+            </h1>
+
+            <div className="flex gap-4 mb-8 flex-wrap">
+              <button type="button" className="flex items-center gap-2 border border-gray-300 rounded-md px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 transition">
+                <img src="https://storage.googleapis.com/a1aa/image/e2824dae-9ecd-47c4-860f-18285207cbc5.jpg" alt="Google logo" width={16} height={16} />
+                Sign up with Google
+              </button>
+              <button type="button" className="flex items-center gap-2 border border-gray-300 rounded-md px-4 py-2 text-xs text-gray-700 hover:bg-gray-50 transition">
+                <img src="https://storage.googleapis.com/a1aa/image/8067583b-dadb-4665-5a3d-f5041ff1ea50.jpg" alt="Facebook logo" width={16} height={16} />
+                Sign up with Facebook
               </button>
             </div>
-          </form>
-        </main>
-      </div>
-    </>
+
+            {error && <p className="text-red-500 mb-4">{error}</p>}
+            <form onSubmit={handleSubmit} classname="space-y-6">
+
+              <div className="flex gap-2 mb-6 flex-wrap">
+
+                <label className="block text-gray-700 text-sm mb-1">
+                  Company Name
+                </label>
+                <input id="companyName"
+                  type="text"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  placeholder="Enter comapany name"
+                  required
+                  className="pl-14 pr-6 py-3 bg-white rounded-lg border border-gray-300 w-full text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#3f3fdc]"
+                />
+
+                <label className="block text-gray-700 text-sm mb-1" >
+                  Password
+                </label>
+                <input id="password"
+                  name="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  placeholder="Enter your password"
+                  className="pl-14 pr-6 py-3 bg-white rounded-lg border border-gray-300 w-full text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#3f3fdc]"
+                />
+
+              </div>
+
+              <div className="flex items-start gap-3 mb-8">
+                <input id="terms" type="checkbox" className="w-5 h-5 rounded-full border border-gray-300 focus:ring-2 focus:ring-pink-300 focus:ring-offset-0 cursor-pointer" />
+                <label htmlFor="terms" className="text-xs text-gray-700 leading-tight select-none max-w-xs">
+                  I’ve read and agree with <span className="underline cursor-pointer">Terms of Service</span> and our <span className="underline cursor-pointer">Privacy Policy</span>
+                </label>
+              </div>
+
+              <a href="/auth/forget_password">
+                <div className="text-right mt-1 text-indigo-600 text-sm  hover:underline cursor-pointer select-none">
+                  Forget password?
+                </div>
+              </a>
+
+              <button type="submit" aria-label="Submit sign up form" className=" h-12 w-full p-2 cursor-pointer rounded-xl bg-indigo-500 hover:bg-blue-600 transition flex items-center justify-center text-white text-xl">
+                Login
+              </button>
+
+            </form>
+
+            <p className="mt-6 text-sm text-gray-700 select-none max-w-xs">
+              Don't have an account? <Link href="/auth/signup_company" className="text-indigo-600 hover:underline">SignUp</Link>
+            </p>
+
+          </section>
+        </div>
+
+      </main>
+    </div>
+
   );
 }
+

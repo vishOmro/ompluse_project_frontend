@@ -127,12 +127,8 @@ const Sidebar = () => {
                 </p>
               </div>
             </Link>
-            <Link href={"/phonebook"}>
-              <div
-                className={`flex items-center gap-3 px-3 py-2 rounded-full cursor-pointer hover:bg-[#f0f2f4] ${
-                  isActive("/phonebook") ? "bg-[#f0f2f4] font-bold" : ""
-                }`}
-              >
+            <Link href={"/phonebook/"}>
+              <div className="flex items-center gap-3 px-3 py-2  rounded-full hover:bg-[#f0f2f4] cursor-pointer">
                 <div
                   className="text-[#111418]"
                   data-icon="Users"
