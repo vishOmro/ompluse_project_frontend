@@ -59,12 +59,19 @@ const UpdatePassword = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 w-4/5">
-      <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-md">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 text-black">
+      <div className="left max-h-3/4 min-w-1/2 flex justify-center items-center">
+        <img
+          src="/images/forgetpass.svg"
+          alt=""
+          height={100}
+          width={100}
+          className="rounded-2xl min-w-3/4 min-h-3/4"
+        />
+      </div>
+      <div className="right p-8 w-full min-w-1/2 flex justify-center flex-col items-center">
         <h1 className="text-2xl font-bold mb-6 text-center">Update Password</h1>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-        {success && <p className="text-green-500 mb-4">{success}</p>}
-        <form className="space-y-4">
+        <form className="w-3/4 space-y-4">
           <div>
             <label
               htmlFor="user-name"
@@ -116,7 +123,7 @@ const UpdatePassword = () => {
             />
           </div>
           <button
-            type="submit" 
+            type="submit"
             className="w-full bg-blue-600 text-white cursor-pointer font-bold py-2 rounded hover:bg-blue-700 transition duration-200"
             onClick={handleSubmit}
           >

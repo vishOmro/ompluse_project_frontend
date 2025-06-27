@@ -3,15 +3,22 @@
 import React, { useEffect, useState } from "react";
 import api from "@/app/utils/api";
 
+import toast from "react-hot-toast";
+import { Trash2 } from "lucide-react";
+
 const GetGroups = () => {
   const [resource, setResource] = useState([]);
   const [error, setError] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [groupName, setGroupName] = useState("");
+  const [selectedId, setSelectedId] = useState("");
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleSubmit = async () => {
     setError("");
 
     try {
-      const response = await api.get(`/group`, {
+      const response = await api.get(`/dlt/groups`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           Accept: "application/json",
@@ -25,6 +32,53 @@ const GetGroups = () => {
     }
   };
 
+  const handleCreateGroup = async () => {
+    try {
+      const formData = new FormData();
+      // Nest parameters under "Group"
+      formData.append("group[name]", groupName);
+
+      const response = await api.post("/dlt/groups", formData, {
+        headers: {
+          // Content-Type is set automatically by FormData
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Accept: "application/json",
+        },
+      });
+
+      // setSuccess("Group created successfully!");
+      toast.success("Group Created Successfully");
+      setShowModal(false);
+      handleSubmit();
+      // Reset form
+      setGroupName("");
+    } catch (error) {
+      toast.error("Error while creating group");
+      console.error("Error while creating Group:", error);
+      const errorMessage =
+        error.response?.data?.error ||
+        error.response?.data?.errors?.ueid?.[0] ||
+        "Failed to create Group. Please check your input and try again.";
+      setError(errorMessage);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await api.delete(`/dlt/groups/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Accept: "application/json",
+        },
+      });
+      toast.success("Group deleted successfully.");
+      setResource((prev) => prev.filter((item) => item.id !== id));
+      setShowDeleteModal(false);
+    } catch (err) {
+      toast.error("Error deleting group.");
+    }
+  };
+
   useEffect(() => {
     handleSubmit();
   }, []);
@@ -32,6 +86,65 @@ const GetGroups = () => {
   return (
     <div className="px-4 py-3">
       <h1 className="text-3xl font-bold">Groups Approvals</h1>
+      {showDeleteModal && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex justify-center items-center">
+          <div className="bg-white rounded-lg p-6 w-[400px] shadow-lg">
+            <h2 className="text-lg font-bold text-red-600 mb-4">
+              Delete Group?
+            </h2>
+            <p className="text-gray-700 mb-4">
+              Are you sure you want to delete this group? This action cannot be
+              undone.
+            </p>
+            <div className="flex justify-end space-x-2">
+              <button
+                className="bg-gray-300 px-4 py-2 rounded"
+                onClick={() => setShowDeleteModal(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="bg-red-600 text-white px-4 py-2 rounded"
+                onClick={() => handleDelete(selectedId)}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showModal && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex justify-center items-center">
+          <div className="bg-white rounded-lg p-6 w-[400px] shadow-lg">
+            <h2 className="text-lg font-bold mb-4">Create New Group</h2>
+            <input
+              type="text"
+              className="w-full p-2 border rounded mb-4"
+              placeholder="Enter Group Name"
+              value={groupName}
+              onChange={(e) => setGroupName(e.target.value)}
+            />
+            <div className="flex justify-end space-x-2">
+              <button
+                className="bg-gray-300 px-4 py-2 rounded"
+                onClick={() => setShowModal(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="bg-blue-600 text-white px-4 py-2 rounded"
+                onClick={() => {
+                  handleCreateGroup();
+                }}
+              >
+                Create
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <p className="text-base text-gray-500 mt-2">
         Manage your Groups approvals for DLT SMS service.
       </p>
@@ -51,11 +164,15 @@ const GetGroups = () => {
             ADD CONTACTS
           </button>
         </a>
-        <a href="/phonebook/get-groups/create-group">
-          <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
-            ADD Groups
-          </button>
-        </a>
+
+        <button
+          className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer"
+          onClick={() => {
+            setShowModal(true);
+          }}
+        >
+          ADD Groups
+        </button>
       </div>
       <div className="flex overflow-hidden rounded-xl border border-[#dce0e5] bg-white mt-5">
         <table className="flex-1">
@@ -92,7 +209,17 @@ const GetGroups = () => {
                   </td>
 
                   <td className="table-column-720 h-[72px] px-4 py-2 w-60 text-[#637488] text-sm font-bold leading-normal tracking-[0.015em]">
-                    Edit
+                    <div className="flex gap-2">
+                      {/* Add Edit here if needed */}
+                      <button
+                        onClick={() => {
+                          setSelectedId(item.id);
+                          setShowDeleteModal(true);
+                        }}
+                      >
+                        <Trash2 className="text-red-800" />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))

@@ -7,14 +7,14 @@ const Sidebar = () => {
   const pathname = usePathname();
   const isActive = (path) => pathname == path;
   return (
-    <div className="layout-content-container flex flex-col min-w-1/6 bg-white border-r-1 border-gray-400">
+    <div className="layout-content-container flex flex-col min-w-1/6 max-h-screen bg-white border-r-1 border-gray-400 ">
       <div className="flex flex-col  gap-2 bg-zinc-200 m-4 mb-1 mt-1  justify-between font-bold p-4 rounded-lg">
         <p className="text-[#111418] truncate ">Total Credits</p>
         <div className="">
           <p className="text-[#111418] text-base  leading-normal">10,000</p>
         </div>
       </div>
-      <div className="flex h-full min-h-[490px] flex-col justify-between bg-white p-4">
+      <div className="flex h-full min-h-[490px] max-h-[100px] flex-col justify-between bg-white p-4 ">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col ">
             <Link rel="stylesheet" href="/dashboard">
@@ -150,27 +150,30 @@ const Sidebar = () => {
                 </p>
               </div>
             </Link>
-            <div className="flex items-center gap-3 px-3 py-2  rounded-full hover:bg-[#f0f2f4] cursor-pointer">
-              <div
-                className="text-[#111418]"
-                data-icon="ClockCounterClockwise"
-                data-size="24px"
-                data-weight="regular"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24px"
-                  height="24px"
-                  fill="currentColor"
-                  viewBox="0 0 256 256"
+            <Link href={"/delivery-history"}>
+              <div className="flex items-center gap-3 px-3 py-2  rounded-full hover:bg-[#f0f2f4] cursor-pointer">
+                <div
+                  className="text-[#111418]"
+                  data-icon="ClockCounterClockwise"
+                  data-size="24px"
+                  data-weight="regular"
                 >
-                  <path d="M136,80v43.47l36.12,21.67a8,8,0,0,1-8.24,13.72l-40-24A8,8,0,0,1,120,128V80a8,8,0,0,1,16,0Zm-8-48A95.44,95.44,0,0,0,60.08,60.15C52.81,67.51,46.35,74.59,40,82V64a8,8,0,0,0-16,0v40a8,8,0,0,0,8,8H72a8,8,0,0,0,0-16H49c7.15-8.42,14.27-16.35,22.39-24.57a80,80,0,1,1,1.66,114.75,8,8,0,1,0-11,11.64A96,96,0,1,0,128,32Z"></path>
-                </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24px"
+                    height="24px"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                  >
+                    <path d="M136,80v43.47l36.12,21.67a8,8,0,0,1-8.24,13.72l-40-24A8,8,0,0,1,120,128V80a8,8,0,0,1,16,0Zm-8-48A95.44,95.44,0,0,0,60.08,60.15C52.81,67.51,46.35,74.59,40,82V64a8,8,0,0,0-16,0v40a8,8,0,0,0,8,8H72a8,8,0,0,0,0-16H49c7.15-8.42,14.27-16.35,22.39-24.57a80,80,0,1,1,1.66,114.75,8,8,0,1,0-11,11.64A96,96,0,1,0,128,32Z"></path>
+                  </svg>
+                </div>
+                <p className="text-[#111418] text-sm font-medium leading-normal">
+                  Delivery History
+                </p>
               </div>
-              <p className="text-[#111418] text-sm font-medium leading-normal">
-                Delivery History
-              </p>
-            </div>
+            </Link>
+
             <div className="flex items-center gap-3 px-3 py-2 rounded-full hover:bg-[#f0f2f4] cursor-pointer">
               <div
                 className="text-[#111418]"

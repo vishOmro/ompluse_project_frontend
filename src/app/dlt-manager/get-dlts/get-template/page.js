@@ -1,15 +1,38 @@
 "use client";
+
+import React, { useEffect, useState } from "react";
 import api from "@/app/utils/api";
-import React, { use, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { FilePenLine, Trash2 } from "lucide-react";
 
 const GetTemplate = () => {
   const [resource, setResource] = useState([]);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const handleSubmit = async () => {
-    setError("");
-    setSuccess("");
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
 
+  const [editData, setEditData] = useState({
+    id: "",
+    template_id: "",
+    entity_id: "",
+    sender_id: "",
+    template_content: "",
+    template_status: "",
+  });
+
+  const payload = {
+    id: editData.id,
+    template: {
+      template_id: editData.template_id,
+      entity_id: editData.entity_id,
+      sender_id: editData.sender_id,
+      template_content: editData.template_content,
+      template_status: editData.template_status,
+    },
+  };
+
+  const handleSubmit = async () => {
     try {
       const response = await api.get(`/dlt/templates`, {
         headers: {
@@ -18,67 +41,213 @@ const GetTemplate = () => {
         },
       });
       setResource(response.data.data);
+      toast.success("Templates fetched successfully!");
+    } catch (err) {
+      toast.error("Error fetching templates.");
+      setError("Failed to fetch template data.");
+    }
+  };
 
-      setSuccess("Template retrieved successfully!");
-    } catch (error) {
-      console.log(error);
+  const handleDelete = async (id) => {
+    try {
+      await api.delete(`/dlt/templates/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Accept: "application/json",
+        },
+      });
+      toast.success("Template deleted successfully.");
+      setResource((prev) => prev.filter((item) => item.id !== id));
+      setShowDeleteModal(false);
+    } catch (err) {
+      toast.error("Error deleting template.");
+    }
+  };
+
+  const handleUpdate = async () => {
+    try {
+      await api.put(`/dlt/templates/${editData.id}`, payload, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Accept: "application/json",
+        },
+      });
+      toast.success("Template updated successfully.");
+      setShowEditModal(false);
+      handleSubmit();
+    } catch (err) {
+      toast.error("Error updating template.");
     }
   };
 
   useEffect(() => {
     handleSubmit();
   }, []);
-  useEffect(() => {
-    console.log("Updated Template:", resource);
-  }, [resource]);
 
   return (
     <div className="px-4 py-3">
       <h1 className="text-3xl font-bold">Template Approvals</h1>
+
+      {/* Edit Modal */}
+      {showEditModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-md w-[500px] shadow-lg">
+            <h2 className="text-xl font-semibold mb-4 text-blue-700">
+              Update Template
+            </h2>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleUpdate();
+              }}
+              className="space-y-4"
+            >
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Template ID
+                </label>
+                <input
+                  type="text"
+                  value={editData.template_id}
+                  onChange={(e) =>
+                    setEditData({ ...editData, template_id: e.target.value })
+                  }
+                  className="mt-1 block w-full border border-gray-300 bg-gray-500/50  rounded-md px-3 py-2"
+                  disabled
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Entity ID
+                </label>
+                <input
+                  type="text"
+                  value={editData.entity_id}
+                  onChange={(e) =>
+                    setEditData({ ...editData, entity_id: e.target.value })
+                  }
+                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Sender ID
+                </label>
+                <input
+                  type="text"
+                  value={editData.sender_id}
+                  onChange={(e) =>
+                    setEditData({ ...editData, sender_id: e.target.value })
+                  }
+                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Message
+                </label>
+                <textarea
+                  value={editData.template_content}
+                  onChange={(e) =>
+                    setEditData({
+                      ...editData,
+                      template_content: e.target.value,
+                    })
+                  }
+                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2"
+                  rows={3}
+                />
+              </div>
+
+              <div className="flex justify-end gap-4 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowEditModal(false)}
+                  className="px-4 py-2 rounded bg-gray-300 text-gray-800"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 rounded bg-blue-600 text-white"
+                >
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Modal */}
+      {showDeleteModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-md w-96 shadow-lg">
+            <h2 className="text-xl font-semibold mb-2 text-red-600">
+              Delete Template?
+            </h2>
+            <p className="text-gray-700 mb-4">
+              Deleting this template is irreversible. Are you sure?
+            </p>
+            <div className="flex justify-end gap-4">
+              <button
+                className="px-4 py-2 rounded bg-gray-300 text-gray-800"
+                onClick={() => {
+                  setShowDeleteModal(false);
+                  setSelectedId(null);
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                className="px-4 py-2 rounded bg-red-600 text-white"
+                onClick={() => handleDelete(selectedId)}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <p className="text-base text-gray-500 mt-2">
         Manage your template approvals for DLT SMS service.
       </p>
+
       <div className="search_create flex w-full justify-around mt-4">
         <input
           type="text"
-          name=""
-          id=""
           placeholder="Search Template name"
-          className=" px-4 py-2 border-gray-400 rounded-xl w-3/5 border-1 focus:outline-1 focus:outline-blue-600"
+          className="px-4 py-2 border-gray-400 rounded-xl w-3/5 border-1 focus:outline-1 focus:outline-blue-600"
         />
         <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
           Search
         </button>
-        {/* <a href="/dlt-manager/create-dlts/create-template"> */}
         <button className="px-8 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">
           Create Template
         </button>
-        {/* </a> */}
       </div>
+
       <div className="flex overflow-hidden rounded-xl border border-[#dce0e5] bg-white mt-5">
         <table className="flex-1">
           <thead>
             <tr className="bg-white">
-              <th className="table-column-120 px-4 py-3 text-left text-[#111418] w-[400px] text-sm font-medium leading-normal">
+              <th className="px-4 py-3 text-left text-[#111418] text-sm font-medium w-[200px]">
                 Template ID
               </th>
-              <th className="table-column-360 px-4 py-3 text-left text-[#111418] w-[400px] text-sm font-medium leading-normal">
-                Entity Id
+              <th className="px-4 py-3 text-left text-[#111418] text-sm font-medium w-[200px]">
+                Entity ID
               </th>
-              <th className="table-column-240 px-4 py-3 text-left text-[#111418] w-60 text-sm font-medium leading-normal">
-                Sender Id
+              <th className="px-4 py-3 text-left text-[#111418] text-sm font-medium w-[200px]">
+                Sender ID
               </th>
-              <th className="table-column-240 px-4 py-3 text-left text-[#111418] w-60 text-sm font-medium leading-normal">
+              <th className="px-4 py-3 text-left text-[#111418] text-sm font-medium w-[300px]">
                 Message
               </th>
-
-              <th className="table-column-480 text-center py-3  text-[#111418] w-[400px] text-sm font-medium leading-normal">
+              <th className="py-3 text-center text-[#111418] text-sm font-medium w-[150px]">
                 Status
               </th>
-              {/* <th className="table-column-600 px-4 py-3 text-left text-[#111418] w-[400px] text-sm font-medium leading-normal">
-                Operator
-              </th> */}
-              <th className="table-column-720 px-4 py-3 text-left  w-60 text-[#637488] text-sm font-medium leading-normal">
+              <th className="px-4 py-3 text-left text-[#637488] text-sm font-medium w-[150px]">
                 Action
               </th>
             </tr>
@@ -87,90 +256,72 @@ const GetTemplate = () => {
             {resource.length > 0 ? (
               resource.map((item, index) => (
                 <tr key={index} className="border-t border-t-[#dce0e5]">
-                  <td className="table-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
+                  <td className="px-4 py-2 text-sm text-[#111418]">
                     {item.template_id}
                   </td>
-
-                  <td className="table-column-360 h-[72px] px-4 py-2 w-[400px] text-[#637488] text-sm font-normal leading-normal">
+                  <td className="px-4 py-2 text-sm text-[#637488]">
                     {item.entity_id}
                   </td>
-                  <td className="table-column-480 h-[72px] px-4 py-2 w-[400px] text-[#637488] text-sm font-normal leading-normal">
+                  <td className="px-4 py-2 text-sm text-[#637488]">
                     {item.sender_id}
                   </td>
-                  <td className="table-column-480 h-[72px] px-4 py-2 w-[400px] text-[#637488] text-sm font-normal leading-normal">
+                  <td className="px-4 py-2 text-sm text-[#637488]">
                     {item.template_content}
                   </td>
-                  {/* <td className="table-column-240 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                      <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm fon t-medium leading-normal w-full">
-                        <span className="truncate">{item.template_status}</span>
-                      </button>
-                    </td> */}
-
-                  <td className="table-column-240 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
-                    <button
-                      className={`flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 w-full
-                         ${item.template_status === "pending"
-                          ? "bg-yellow-400 text-white"
+                  <td className="px-4 py-2 text-sm text-center">
+                    <span
+                      className={`inline-block rounded-full px-4 py-1 text-white text-sm ${
+                        item.template_status === "pending"
+                          ? "bg-yellow-400"
                           : item.template_status === "success"
-                            ? "bg-green-500 text-white"
-                            : item.template_status === "failed"
-                              ? "bg-red-500 text-white"
-                              : "bg-gray-200 text-black"
-                        }
-                        `}
+                          ? "bg-green-500"
+                          : item.template_status === "failed"
+                          ? "bg-red-500"
+                          : "bg-gray-300 text-black"
+                      }`}
                     >
-                      <span className="truncate">{item.template_status}</span>
-                    </button>
+                      {item.template_status}
+                    </span>
                   </td>
-
-                  <td className="table-column-720 h-[72px] px-4 py-2 w-60 text-[#637488] text-sm font-bold leading-normal tracking-[0.015em]">
-                    Edit
+                  <td className="px-4 py-2 text-sm font-bold text-[#637488]">
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => {
+                          setEditData({
+                            id: item.id,
+                            template_id: item.template_id,
+                            entity_id: item.entity_id,
+                            sender_id: item.sender_id,
+                            template_content: item.template_content,
+                            template_status: item.template_status,
+                          });
+                          setShowEditModal(true);
+                        }}
+                      >
+                        <FilePenLine className="text-blue-700" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSelectedId(item.id);
+                          setShowDeleteModal(true);
+                        }}
+                      >
+                        <Trash2 className="text-red-800" />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
                 <td colSpan="6" className="text-center py-4 text-gray-500">
-                  No data available.
+                  No template data available.
                 </td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
-
-      <style jsx>{`
-        @container (max-width: 120px) {
-          .table-column-120 {
-            display: none;
-          }
-        }
-        @container (max-width: 240px) {
-          .table-column-240 {
-            display: none;
-          }
-        }
-        @container (max-width: 360px) {
-          .table-column-360 {
-            display: none;
-          }
-        }
-        @container (max-width: 480px) {
-          .table-column-480 {
-            display: none;
-          }
-        }
-        @container (max-width: 600px) {
-          .table-column-600 {
-            display: none;
-          }
-        }
-        @container (max-width: 720px) {
-          .table-column-720 {
-            display: none;
-          }
-        }
-      `}</style>
     </div>
   );
 };

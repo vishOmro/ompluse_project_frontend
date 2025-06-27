@@ -15,13 +15,15 @@ const SmsForm = () => {
     contacts: "",
     group_ids: [],
     csv_file: null,
+    multipart: "",
+    flash: "",
   });
 
   useEffect(() => {
     Promise.all([
       api.get("/dlt/senders"),
       api.get("/dlt/templates"),
-      api.get("/group"),
+      api.get("/dlt/groups"),
     ]).then(([sendersRes, templatesRes, groupsRes]) => {
       setSenders(sendersRes.data.data);
       setTemplates(templatesRes.data.data);
@@ -41,6 +43,8 @@ const SmsForm = () => {
         form.append("sms[group_ids][]", id);
       });
     }
+    form.append("sms[multipart]", formData.multipart);
+    form.append("sms[flash]", formData.flash);
 
     if (formData.csv_file) form.append("sms[csv_file]", formData.csv_file);
 
@@ -48,8 +52,10 @@ const SmsForm = () => {
       const res = await api.post("/dlt/sms", form, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+      toast.success("SMS records created successfully");
       console.log("SMS records created:", res.data);
     } catch (error) {
+      toast.error("Error in creating sms record");
       console.error("Error:", error.response.data);
     }
   };
@@ -160,10 +166,66 @@ const SmsForm = () => {
             className="w-full p-2 border rounded-md file:bg-blue-500 file:text-white file:px-4 file:py-2 file:rounded file:cursor-pointer"
           />
         </div>
+        <div className="w-3/4 flex">
+          <div className="w-full flex gap-6 items-center  ">
+            <div className="flex gap-2">
+              <input
+                type="radio"
+                id="multipart_form"
+                name="multipart_form"
+                value="true"
+                onChange={(e) => {
+                  setFormData({ ...formData, multipart: e.target.value });
+                }}
+              />
+              <label htmlFor="html">Multipart Form</label>
+            </div>
+            <div className="flex gap-2">
+              <input
+                type="radio"
+                id="multipart_form"
+                name="multipart_form"
+                value="false"
+                onChange={(e) => {
+                  setFormData({ ...formData, multipart: e.target.value });
+                }}
+              />
+              <label htmlFor="html">Non Multipart form</label>
+            </div>
+          </div>
+
+          <div className="w-full flex gap-6 mt-1 ">
+            <div className="flex gap-2">
+              <input
+                type="radio"
+                id="flash_message"
+                name="flash_message"
+                value="true"
+                onChange={(e) => {
+                  setFormData({ ...formData, flash: e.target.value });
+                }}
+              />
+              <label htmlFor="html">Flash message</label>
+            </div>
+            <div className="flex gap-2">
+              <input
+                type="radio"
+                id="flash_message"
+                name="flash_message"
+                value="false"
+                onChange={(e) => {
+                  setFormData({ ...formData, flash: e.target.value });
+                }}
+              />
+              <label htmlFor="html">Non Flash Message</label>
+            </div>
+          </div>
+        </div>
       </form>
       <button
         type="submit"
         className=" w-56 py-2 bg-blue-600 text-white  px-8 rounded-md hover:bg-blue-700 transition-colors"
+        onClick={handleSubmit}
       >
         Submit
       </button>

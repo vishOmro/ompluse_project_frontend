@@ -25,9 +25,8 @@ export default function Timeline() {
         <div className="absolute top-1/2 left-0 w-full" />
         {/* Step Balls */}
         {steps.map((step, index) => (
-          <div className="flex flex-col w-full text-center">
+          <div className="flex flex-col w-full text-center" key={index}>
             <div
-              key={index}
               onClick={() => handleClick(index)}
               className={`py-2 border-1 ${
                 index <= activeStep

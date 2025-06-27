@@ -14,7 +14,6 @@ const Page = () => {
       "/auth/login",
       "/auth/register",
       "/auth/company_login",
-      "/sms",
     ];
     const pathIsProtected = !publicPaths.includes(router.pathname);
 

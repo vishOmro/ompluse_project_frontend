@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import api from "@/app/utils/api";
+import Graph from "../component/graph";
+import PieChartComponent from "../component/PieChartComponent";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -93,7 +95,10 @@ export default function Dashboard() {
 
         <section className="flex flex-col lg:flex-row gap-6">
           {/* Bar Chart Section */}
-          <div className="flex-1 bg-white rounded-xl p-6 shadow-[0_0_10px_#E6E6E6] max-w-full">
+          <div className="w-1/2">
+            <Graph />
+          </div>
+          {/* <div className="flex-1 bg-white rounded-xl p-6 shadow-[0_0_10px_#E6E6E6] max-w-full">
             <h3 className="text-xs font-semibold mb-1">
               Hourly Section Volume
             </h3>
@@ -122,17 +127,13 @@ export default function Dashboard() {
                 View Report
               </button>
             </div>
-          </div>
+          </div>  */}
 
           {/* Predefined Report Card */}
-          <div className="bg-white rounded-xl p-6 shadow-[0_0_10px_#E6E6E6] max-w-[400px] w-full relative">
-            <div className="absolute top-4 right-4 text-gray-400 text-xs rotate-90 select-none">
-              <i className="fas fa-arrows-alt-v"></i>
+          <div className="bg-white rounded-xl p-4 shadow-[0_0_10px_#E6E6E6] max-w-[400px] w-1/2 relative">
+            <div className="">
+              <PieChartComponent />
             </div>
-            <h3 className="text-sm font-bold mb-1">Predefined Report</h3>
-            <p className="text-[10px] text-gray-500 mb-6">
-              Total profit growth of 25%
-            </p>
             <ul className="text-xs space-y-3 mb-6">
               <li className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#E87C7C] inline-block"></span>
