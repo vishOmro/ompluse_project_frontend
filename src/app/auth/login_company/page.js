@@ -19,7 +19,7 @@ export default function CompanyLogin() {
         password,
       });
       Cookies.set("token", response.data.token);
-      router.push("/dashboard");
+      router.push("/dashboard/company");
     } catch (err) {
       setError("Login failed. Please check your credentials.");
     }
