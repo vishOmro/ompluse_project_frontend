@@ -19,8 +19,8 @@ export default function Dashboard() {
     const fetchUser = async () => {
       try {
         const response = await api.get("/dashboard"); // Add this endpoint in Phoenix
-        //console.log(response);
-        setUser(response.data.company || response.data.user);
+        // console.log("Response for dashboard: ", response);
+        setUser(response.data.company || response.data.data);
       } catch (err) {
         console.log("Error while authenticating: ", err);
         setUser(err);

@@ -2,11 +2,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { useUser } from "../utils/UserProvider";
 
 const Sidebar = () => {
-  const userData = useUser();
-  console.log(userData);
   const pathname = usePathname();
   const isActive = (path) => pathname == path;
   return (
@@ -14,9 +11,7 @@ const Sidebar = () => {
       <div className="flex flex-col  gap-2 bg-zinc-200 m-4 mb-1 mt-1  justify-between font-bold p-4 rounded-lg">
         <p className="text-[#111418] truncate ">Total Credits</p>
         <div className="">
-          <p className="text-[#111418] text-base  leading-normal">
-            {userData ? userData.credits : 1000}
-          </p>
+          <p className="text-[#111418] text-base  leading-normal">1000</p>
         </div>
       </div>
       <div className="flex h-full min-h-[490px] max-h-[100px] flex-col justify-between bg-white p-4 ">
